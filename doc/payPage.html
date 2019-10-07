@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付页面</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/payPage.css"/>
+	</head>
+	<body>
+		<div class="header"><img src="payImg/skt-icon.jpg"/>skt收款通</div>
+		<div class="expire-wrapper">订单已过期,请重新下单</div>
+		<!-- 普通收款码 -->
+		<div class="ordinary-wrapper all-wrapper">
+			<div class="pay-money"></div>
+			<div class="count-down"></div>
+			<div class="code-wrapper">
+				<div class="icon"></div>
+				<div id="code-canvas" class="code-canvas"></div>
+			</div>
+			<div class="startApp code-btn">点击启动支付宝支付</div>
+			<div class="attention">
+				<h1>截图保存到相册，支持以下app进行支付</h1>
+				<div class="support-alipay support-wrapper">
+					<img src="payImg/alipay-icon.png"/>
+				</div>
+				<div class="support-wechat support-wrapper">
+					<img src="payImg/wechat-icon.png"/>
+				</div>
+				<div class="unionpay-explain">支持各大银行app</div>
+				<div class="support-unionpay support-wrapper">
+					<img src="payImg/unionpay-icon.jpg"/>
+					<img src="payImg/zs-icon.jpg"/>
+					<img src="payImg/ny-icon.jpg"/>
+					<img src="payImg/gs-icon.png"/>
+					<img src="payImg/jd-icon.jpg"/>
+					<img src="payImg/js-icon.jpg"/>
+				</div>
+				<div class="support-buybalpay support-wrapper">
+					<img src="payImg/alipay-icon.png"/>
+					<img src="payImg/wechat-icon.png"/>
+				</div>
+				<p class="item-atten">1.重复支付将不到账且不退款</p>
+				<p class="item-atten">2.切勿修改金额，按照指定金额充值，否则无法成功充值</p>
+				<p class="item-atten">3.请在规定时间内完成支付，订单过期之后请不要支付</p>
+			</div>
+		</div>
+		
+		<!-- 支付宝转卡 -->
+		<div class="bank-wrapper all-wrapper">
+			<div class="pay-money"></div>
+			<div class="count-down"></div>
+			<div class="attention">
+				<h1>支付宝支付</h1>
+				<p class="item-atten">1.重复支付将不到账且不退款</p>
+				<p class="item-atten">2.切勿修改金额，按照指定金额充值，否则无法成功充值</p>
+				<p class="item-atten">3.请在规定时间内完成支付，订单过期之后请不要支付</p>
+			</div>
+			<div class="startApp bank-btn">点击启动支付宝</div>
+		</div>
+		
+		<!-- 支付宝转账 -->
+		<div class="transfer-wrapper all-wrapper">
+			<div class="pay-money"></div>
+			<div class="count-down"></div>
+			<div class="input">
+				<input class="transfer-val" type="text" placeholder="请输入您的支付宝昵称"/>
+			</div>
+			<div class="attention">
+				<h1>支付宝支付</h1>
+				<p class="item-atten">1.请输入支付宝昵称，注意是昵称不是账户名</p>
+				<p class="item-atten">2.重复支付将不到账且不退款</p>
+				<p class="item-atten">3.切勿修改金额，按照指定金额充值，否则无法成功充值</p>
+				<p class="item-atten">4.请在规定时间内完成支付，订单过期之后请不要支付</p>
+			</div>
+			
+			<div class="startApp transfer-btn">点击启动支付宝</div>
+		</div>
+	</body>
+	<script src="lib/jquery.min.js"></script>
+	<script src="lib/qrcode.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="payJs/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script src="payJs/payPage.js" type="text/javascript" charset="utf-8"></script>
+</html>

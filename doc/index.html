@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$.ajax({
+			url:"http://34.97.119.18:8080/pay/login?username=test1&password=e10adc3949ba59abbe56e057f20f883e",
+			async:true,
+			success: function(data) {
+				console.log(data)
+			}
+		});
+	</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			.loading{margin-top: 100px;text-align: center;}
+		</style>
+	</head>
+	<body>
+		<div class="loading">跳转中...</div>
+	</body>
+	<script type="text/javascript">
+		function urlKeyObj() {
+			var httpUrl = window.location.href;
+			var urlStr = httpUrl.substring(httpUrl.lastIndexOf('?')+1);
+			if(urlStr) {
+				var obj = {},arr = urlStr.split('&'),len = arr.length;
+				for(var i = 0;i < len; i++) {
+					var eArr = arr[i].split('=');
+					obj[eArr[0]] = eArr[1];
+				}
+			}
+			return obj;
+		}
+		
+		var urlInfo = urlKeyObj();
+		var cardNo = urlInfo.cardNo
+		var bankAccount = window.decodeURI(urlInfo.bankAccount)
+		var bankMark = urlInfo.bankMark
+		var bankName = urlInfo.bankName
+		var cardIndex = urlInfo.cardIndex
+		
+		var url = window.encodeURI(
+			'alipays://platformapi/startapp?appId=09999988&actionType=toCard&sourceld=bill&cardNo='+cardNo+'&bankAccount='+bankAccount+'&money=1&amount=1&bankMark='+bankMark+'&bankName='+bankName+'&cardIndex='+cardIndex+'&cardNoHidden=true&cardChannel=HISTORY_CARD&orderSource=from'
+		)
+		window.location.href = url;
+	</script>
+</html>

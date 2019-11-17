@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付成功</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.header{
+				text-align: center;
+				height: 50px;
+				line-height: 50px;
+				border-bottom: 1px solid #ccc;
+			}
+			.content{
+				margin-top: 100px;
+			}
+			.img{
+				width: 64px;
+				height: 64px;
+				margin: 0 auto;
+				background: url('data:image/png;base64,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') no-repeat;
+				background-size: 100% 100%;
+			}
+			.info{
+				text-align: center;
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">支付结果</div>
+		<div class="content">
+			<div class="img"></div>
+			<div class="info_1 info">支付成功</div>
+			<div class="info_2 info">请返回游戏查看结果</div>
+		</div>
+	</body>
+</html>

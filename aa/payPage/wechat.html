@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付页面</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<style type="text/css">
+			.header{
+				background: url(payImg/wechat-title.jpg) no-repeat center;
+				background-size: auto 140%;
+			}
+			.expires-wrapper{
+				display: none;
+				padding-top: 100px;
+				text-align: center;
+			}
+			.expires-icon{
+				width: 100px;
+				height: 100px;
+			}
+			.expires-explain{
+				margin-top: 20px;
+			}
+			.main{
+				display: none;
+			}
+			.main .money{
+				margin-top: 20px;
+				text-align: center;
+				font-size: 36px;
+				font-weight: bold;
+			}
+			.code-wrapper{
+				background-color: #38b035;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header"></div>
+		<div class="expires-wrapper">
+			<div>
+				<img class="expires-icon" src="payImg/expires-icon.jpg"/>
+				<p class="expires-explain">订单已过期，请重新下单...</p>
+			</div>
+		</div>
+		<div class="main">
+			<div class="money"></div>
+			<div class="count-down">倒计时: --分钟 --秒</div>
+			<div class="code-wrapper">
+				<div id="code-canvas" class="code-canvas"></div>
+			</div>
+			<div class="attention">
+				<h1>截图保存到相册，进行微信扫码支付</h1>
+				<p class="item-atten">1.重复支付将不到账且不退款</p>
+				<p class="item-atten">2.切勿修改支付金额，按照指定金额充值(多支付少支付都无法成功上分)，否则无法成功充值</p>
+				<p class="item-atten">3.请在规定时间内完成支付，订单过期之后请不要支付</p>
+			</div>
+		</div>
+	</body>
+	<!--<script src="lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<!--<script src="lib/jquery.qrcode.min.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+	<script src="js/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var urlInfo = getUrlParams()
+		console.log(urlInfo)
+		if(new Date().getTime() > Number(urlInfo.expireTime)) {
+			$('.expires-wrapper').show()
+		} else {
+			showCode(urlInfo)
+		}
+		
+		function showCode(urlInfo) {
+			$('.main').show()
+			$('.money').text('￥'+urlInfo.money)
+			createQrcode($('#code-canvas'), urlInfo.codeString)
+			console.log(urlInfo.createTime)
+			countDown(Number(urlInfo.expireTime), urlInfo.orderId)
+		}
+
+		// 倒计时并开始查询订单的状态
+		function countDown(endTime, orderId) {
+			console.log(endTime)
+			var countDownEle = $('.count-down');
+			var timer_1 = setInterval(clock, 1000); // 开启定时器
+			var timer_2  = setInterval(getOrderStatus, 1500)
+			function clock() {
+				var nowTime = new Date(); // 一定是要获取最新的时间
+				var second = parseInt((endTime - nowTime.getTime()) / 1000);
+				if(second <= 0) {
+					clearInterval(timer_1)
+					clearInterval(timer_2)
+					countDownEle.html("倒计时: 0分钟0秒");
+					$('.main').hide()
+					$('.expires-wrapper').show()
+					return
+				}
+				// 用将来的时间毫秒 - 现在的毫秒 / 1000 得到的 还剩下的秒 可能处不断 取整
+				var m = parseInt(second / 60);
+				var s = parseInt(second%60); // 当前的秒
+				m < 10 ? m = "0" + m : m;
+				s < 10 ? s = "0" + s : s;
+				countDownEle.html("倒计时: " + m + "分钟 " + s + "秒");
+			}
+			function getOrderStatus() {
+				$.ajax({
+					url: '/pay/getOrderResult',
+					type:"post",
+					data: {
+						orderId: orderId
+					},
+					success: function(data) {
+						if(data.data == 0) { // 完成
+							clearInterval(timer_2)
+							window.location.replace('./successPage.html')
+						} else if(data.data == 1) {	// 过期
+							clearInterval(timer_2)
+							$('.main').hide()
+							$('.expires-wrapper').show()
+						} else if(data.data == 2) {	// 未完成
+							console.log('未支付')
+						}  else {
+							clearInterval(timer_2)
+						}
+					}
+				});
+			}
+		}
+	</script>
+</html>

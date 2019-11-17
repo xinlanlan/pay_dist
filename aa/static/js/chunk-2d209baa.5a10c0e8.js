@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["chunk-2d209baa"],{a9fb:function(e,n,t){"use strict";t.r(n),t("a481");var u={beforeRouteEnter:function(e,n,t){t(function(e){e.$router.replace(n.path)})}},a=t("2877"),r=Object(a.a)(u,function(){var e=this.$createElement;return(this._self._c||e)("div")},[],!1,null,null,null);n.default=r.exports}}]);

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.img img{
+				width: 100%;
+				height: auto;
+			}
+			.header-wrapper{
+				border-bottom: 1px solid #ccc;
+				height: 80px;
+				line-height: 80px;
+			}
+			.header{
+				width: 1200px;
+				margin: 0 auto;
+				font-size: 26px;
+				font-weight: bold;
+				text-align: center;
+			}
+			section{
+				width: 1200px;
+				margin: 0 auto;
+			}
+			section h1{
+				margin: 20px auto;
+				font-size: 18px;
+				line-height: 24px;
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header-wrapper"><div class="header">支付宝转卡相关参数设置</div></div>
+		<section>
+			<h1>1.查找卡号步骤：先使用手机支付宝转账一笔款到银行卡，然后支付宝登录电脑，到转账银行卡页面获取</h1>
+			<div class="img">
+				<img src="img/bank_doc_1.png"/>
+			</div>
+		</section>
+		<section>
+			<h1>查看源码;ctrl-f 查找,熟入姓名,如下图,查找相应参数</h1>
+			<div class="img">
+				<img src="img/bank_doc_2.png"/>
+			</div>
+		</section>
+		<section>
+			<h1>3.打开SKT收款后台 码商找到二维码项 -> 添加二维码 -> 选择支付宝转卡.将相应的参数填入</h1>
+			<div class="img">
+				<img src="img/bank_doc_3.png"/>
+			</div>
+		</section>
+	</body>
+</html>

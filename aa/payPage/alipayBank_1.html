@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				color: #3e3e3e;
+			}
+			.logo{
+				height: 200px;
+				margin: 0 auto;
+				text-align: center;
+				margin-top: 40px;
+			}
+			.logo img{
+				height: 100%;
+			}
+			#loading{
+				line-height: 30px;
+				text-align: center;
+				margin-top: 40px;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--<div class="logo">
+			<img src="../images/ant.jpg"/>
+		</div>-->
+		<div id="loading">loading...</div>
+	</body>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		// 首先获取订单号
+	var oHttp = window.location.origin
+	var urlInfo = getUrlParams()
+	var orderId = urlInfo.orderId
+	
+	// 根据订单号获取二维码信息
+	getCodeInfo(orderId)
+	function getCodeInfo(orderId) {
+		$.ajax({
+			url: oHttp + '/pay/pages/getCodeInfo',
+			type:"post",
+			data: {
+				orderId: orderId
+			},
+			success: function(data) {
+				console.log(data)
+				if(data.code != 0) {
+					tipWin('关闭，刷新重试')
+					return
+				}
+				// 判断时间如果过期
+				if(data.code == 20 || (new Date().getTime() > Number(data.data.expireTime))) {
+					//$('.expires-wrapper').show();
+					return
+				}
+				var codeInfo = data.data.codeInfo
+				var money = data.data.money
+				var url = window.encodeURI('alipays://platformapi/startapp?appId=09999988&actionType=toCard&sourceld=bill&cardNo='+codeInfo.cardNo+'&bankAccount='+codeInfo.bankAccount+'&money'+money+'=&amount='+money+'&bankMark='+codeInfo.bankMark+'&bankName='+codeInfo.bankName+'&cardIndex='+codeInfo.cardIndex+'&cardNoHidden=true&cardChannel=HISTORY_CARD&orderSource=from')
+				location.href = url;
+			},
+			error: function() {
+				tipWin('请检查网络是否连接！！')
+			}
+		});
+	}
+
+		setTimeout(function() {
+			document.getElementById('loading').innerHTML = '若支付失败请重新下单...'
+		}, 3000)
+	</script>
+</html>

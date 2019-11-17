@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付页面</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<style type="text/css">
+			.header{
+				background: url(payImg/alipay-icon.jpg) no-repeat center;
+				background-size: auto 68%;
+			}
+			.expires-wrapper{
+				display: none;
+				padding-top: 100px;
+				text-align: center;
+			}
+			.expires-icon{
+				width: 100px;
+				height: 100px;
+			}
+			.expires-explain{
+				margin-top: 20px;
+			}
+			.bank-wrapper{
+				display: none;
+			}
+			.bank-wrapper .money{
+				margin-top: 20px;
+				text-align: center;
+				font-size: 36px;
+				font-weight: bold;
+			}
+			.text{
+				padding: 5px 20px;
+				color: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header"></div>
+		<div class="expires-wrapper">
+			<div>
+				<img class="expires-icon" src="payImg/expires-icon.jpg"/>
+				<p class="expires-explain">订单已过期，请重新下单...</p>
+			</div>
+		</div>
+		<div class="bank-wrapper all-wrapper">
+			<div class="money"></div>
+			<div class="count-down"></div>
+			<div class="attention">
+				<h1>支付宝支付</h1>
+				<p class="item-atten">1.重复支付将不到账且不退款</p>
+				<p class="item-atten">2.切勿修改金额，按照指定金额充值，否则无法成功充值</p>
+				<p class="item-atten">3.请在规定时间内完成支付，订单过期之后请不要支付</p>
+				<p class="item-atten">4.该支付方式一般3-4分钟到账，如未到账请及时联系客服</p>
+			</div>
+			<div class="text">方式一(如果方式一不能通过请选择方式二)</div>
+			<div class="startApp_1 startApp">点击启动支付宝</div>
+			<div class="text">方式二(飞行模式)</div>
+			<div class="startApp_2 startApp">点击启动支付宝</div>
+		</div>
+	</body>
+	<!--<script src="lib/jquery.min.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/utils.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	$(function() {
+	// 首先获取订单号
+	var urlInfo = getUrlParams()
+	var orderId = urlInfo.orderId
+	console.log(orderId)
+	
+	// 根据订单号获取二维码信息
+	getCodeInfo(orderId)
+	function getCodeInfo(orderId) {
+		$.ajax({
+			url: "/pay/pages/getCodeInfo",
+			type:"post",
+			data: {
+				orderId: orderId
+			},
+			success: function(data) {
+				console.log(data)
+				if(data.code != 0) {
+					tipWin('关闭，刷新重试')
+					return
+				}
+				// 判断时间如果过期
+				if(data.code == 20 || (new Date().getTime() > Number(data.data.expireTime))) {
+					$('.expires-wrapper').show();
+					return
+				}
+				
+				showCode(data.data)
+				$('.bank-wrapper').show()
+			},
+			error: function() {
+				tipWin('请检查网络是否连接！！')
+			}
+		});
+	}
+
+	// 根据类型展示不同的二维码
+//	showCode({
+//		channel: 'alipay-bank',
+//		createTime: 1570645839095,
+//		money: '10.00',
+//		expireTime: 300,
+//		codeInfo: {
+//			bankAccount: 'www.baidu.com',
+//			cardNo: '123',
+//			bankName: '1234',
+//			bankMark: 'bankMark',
+//			cardIndex: 'wew'
+//		}
+//	})
+	
+	function showCode(codeInfo) {
+		$('.bank-wrapper').show()
+		$('.money').text('￥'+codeInfo.money)
+		countDown(codeInfo.expireTime, orderId)
+		bankFunc(orderId)
+	}
+	
+	// 点击启动支付宝
+	function bankFunc(orderId) {
+		$('.startApp_1').click(function() {
+//			var url = window.encodeURI('alipays://platformapi/startapp?appId=09999988&actionType=toCard&sourceld=bill&cardNo='+codeInfo.cardNo+'&bankAccount='+codeInfo.bankAccount+'&money='+money+'&amount='+money+'&bankMark='+codeInfo.bankMark+'&bankName='+codeInfo.bankName+'&cardIndex='+codeInfo.cardIndex+'&cardNoHidden=true&cardChannel=HISTORY_CARD&orderSource=from')
+//			window.location.href = url;
+			window.location.href = 'alipays://platformapi/startapp?appId=20000160&url='+decodeURIComponent(window.location.origin+'/payPage/alipayBank_1.html?orderId='+orderId)
+		})
+		$('.startApp_2').click(function() {
+			window.location.href = 'alipays://platformapi/startapp?appId=20000160&url='+decodeURIComponent(window.location.origin+'/payPage/alipayBank.html?orderId='+orderId)
+		})
+	}
+	
+	// 倒计时并开始查询订单的状态
+	function countDown(endTime, orderId) {
+		var countDownEle = $('.count-down');
+		var timer_1 = setInterval(clock, 1000); // 开启定时器
+		var timer_2  = setInterval(getOrderStatus, 1500)
+		function clock() {
+			var nowTime = new Date(); // 一定是要获取最新的时间
+			var second = parseInt((endTime - nowTime.getTime()) / 1000);
+			if(second <= 0) {
+				clearInterval(timer_1)
+				clearInterval(timer_2)
+				countDownEle.html("倒计时: 0分钟0秒");
+				$('.all-wrapper').hide()
+				$('.expires-wrapper').show()
+				return
+			}
+			var m = parseInt(second / 60);
+			var s = parseInt(second%60); // 当前的秒
+			m < 10 ? m = "0" + m : m;
+			s < 10 ? s = "0" + s : s;
+			countDownEle.html("倒计时: " + m + "分钟 " + s + "秒");
+		}
+		function getOrderStatus() {
+			$.ajax({
+				url: '/pay/getOrderResult',
+				type:"post",
+				data: {
+					orderId: orderId
+				},
+				success: function(data) {
+					if(data.data == 0) { // 完成
+						clearInterval(timer_2)
+						window.location.replace('./successPage.html')
+					} else if(data.data == 1) {	// 过期
+						clearInterval(timer_2)
+						$('.main').hide()
+						$('.expires-wrapper').show()
+					} else if(data.data == 2) {	// 未完成
+						console.log('未支付')
+					}  else {
+						clearInterval(timer_2)
+					}
+				}
+			});
+		}
+	}
+})
+	</script>
+</html>

